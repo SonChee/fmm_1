@@ -1,0 +1,16 @@
+<h2>Edit team : <%= @team.name %></h2>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @team, as: :team, url: admin_team_path do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <p> Name </p>
+      <%= f.text_field :name %>
+
+      <p> Description </p>
+      <%= f.text_field :description %>
+      
+      <%= f.submit "+ Edit team", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

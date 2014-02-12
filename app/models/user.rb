@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :validate_password
   before_save { self.email = email.downcase }
-  before_create :create_remember_tokene
+  before_create :create_remember_token
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, if: :validate_password
   scope :admins, -> { where(permission: 2)}
   scope :members, -> { where(permission: 1)}
+  scope :free_members, -> { where(team_id: nil)}
+  belongs_to :team
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
