@@ -1,4 +1,5 @@
 class Admin::SkillsController < ApplicationController
+  after_action :logs
 	def index
     @skills = Skill.all
     @skill = Skill.new
@@ -53,5 +54,9 @@ class Admin::SkillsController < ApplicationController
 
   def skill_params
     params.require(:skill).permit(:name)
+  end
+
+  def logs
+    record_activity()
   end
 end

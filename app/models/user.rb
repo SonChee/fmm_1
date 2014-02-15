@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   
   has_many :user_position_in_projects
   has_many :projects, through: :user_position_in_projects
-  
+  has_many :logs
   belongs_to :team
   
   attr_accessor :validate_password

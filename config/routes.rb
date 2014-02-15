@@ -7,6 +7,7 @@ Fmm1::Application.routes.draw do
     resources :teams
     resources :skills
     resources :positions
+    resources :activity_logs
     resources :projects do
       resources :user_position_in_projects
     end

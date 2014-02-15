@@ -1,7 +1,7 @@
 class Admin::ProjectsController < ApplicationController
   # before_action :signed_in_user, :new, :create, :index, :show, :edit, :update, :destroy
   # before_action :admin_user, :new, :create, :edit, :update, :destroy
-  
+  after_action :logs
   def new
     @project = Project.new
     @users = User.all
@@ -72,5 +72,7 @@ class Admin::ProjectsController < ApplicationController
   def admin_user
     redirect_to root_path unless admin_user? current_user
   end
-  
+  def logs
+    record_activity()
+  end
 end

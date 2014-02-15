@@ -1,0 +1,45 @@
+<% if !@activities.nil? %>
+  <table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Admin/member</th>
+      <th>Activity</th>
+      <th>Controller</th>
+      <th>Time</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <% @activities.each do |activity| %>
+      <tbody>
+        <tr>
+          <td><%= activity.id %></td>
+          <td><%= activity.user.name %></td>
+          <% if(activity.user.permission == 2) %>
+            <td>Leader</td>
+          <% else %>
+            <td>Member</td>
+          <% end %>
+          <td><%= activity.note %></td>
+          <td><%= activity.controller %></td>
+          <td><%= activity.created_at %></td>
+          <td class="form-actions"><%= link_to 'Delete', admin_activity_log_path(activity),class: "btn btn-mini btn-danger",
+                                   method: :delete, data: { confirm: "Are you sure?"}, title: activity.id %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+<% end %>
+
+<% if flash[:error] %>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong><%= flash[:error] %></strong>
+  </div>
+<% end %>
+<% if flash[:success] %> 
+  <div class="alert alert-success"> 
+    <strong><%= flash[:success] %></strong>
+  </div> 
+<% end %>

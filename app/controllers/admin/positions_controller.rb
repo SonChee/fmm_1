@@ -1,5 +1,5 @@
 class Admin::PositionsController < ApplicationController
-  
+  after_action :logs
   def new
     @position = Position.new
   end
@@ -59,5 +59,7 @@ class Admin::PositionsController < ApplicationController
     params.require(:position).permit(:name, :abbreviation)
                                     
   end
-  
+  def logs
+    record_activity()
+  end
 end

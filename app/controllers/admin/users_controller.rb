@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-
+  after_action :logs
   def index
     @users = User.paginate page: params[:page] , per_page: 5
   end
@@ -56,5 +56,7 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :birth_date, :permission,
                                                 :password, :password_confirmation, :profile)
   end
-
+  def logs
+    record_activity()
+  end
 end

@@ -1,4 +1,5 @@
 class Admin::TeamsController < ApplicationController
+  after_action :logs
 	def index
     @teams = Team.paginate page: params[:page], per_page: 5 
   end
@@ -101,5 +102,9 @@ class Admin::TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(:name, :description )
+  end
+
+  def logs
+    record_activity()
   end
 end
